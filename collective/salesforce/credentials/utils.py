@@ -18,7 +18,7 @@ def get_webservice_settings(id):
     return webservices[id]
 
 
-SOCKET_TIMEOUT = 30
+SOCKET_TIMEOUT = 60
 
 
 def get_wsdl_uri(spec):
