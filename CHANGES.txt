@@ -1,10 +1,13 @@
 Changelog
 =========
-asdf
+
 1.0 (unreleased)
 ----------------
 
-* Initial release.
-  []
+* Make get_salesforce_suds_client return a client even if the authentication
+  failed, to make it easier to log exceptions including the message that was
+  to be sent to Salesforce.
+  [davisagli - 2011-07-26]
 
-asdf
+* Initial implementation.
+  [davisagli, jessesnyder]

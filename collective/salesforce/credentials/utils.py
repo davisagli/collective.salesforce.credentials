@@ -1,9 +1,14 @@
+import logging
 from pkg_resources import resource_filename
 from zope.component import getUtility
 from collective.salesforce.credentials.interfaces import ISalesforceWebservice
 from collective.salesforce.credentials.interfaces import ISalesforceCredentialsSettings
 from plone.registry.interfaces import IRegistry
 from z3c.suds import get_suds_client
+from suds import WebFault
+
+
+logger = logging.getLogger('collective.salesforce.credentials')
 
 
 def get_webservice_settings(id):
@@ -40,12 +45,17 @@ def get_salesforce_suds_client(id):
         timeout = SOCKET_TIMEOUT,
         location = auth_settings.endpoint,
         )
-    res = auth_client.service.login(login, password)
+    res = None
+    try:
+        res = auth_client.service.login(login, password)
+    except WebFault:
+        logger.exception('Unable to log in to Salesforce.')
 
     # connect to the service
     client = get_suds_client(get_wsdl_uri(settings.wsdl))
     token = client.factory.create('SessionHeader')
-    token.sessionId = res.sessionId
+    if res is not None:
+        token.sessionId = res.sessionId
     client.set_options(
         timeout = SOCKET_TIMEOUT,
         location = settings.endpoint,
