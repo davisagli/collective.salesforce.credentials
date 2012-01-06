@@ -4,6 +4,9 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+* Added control panel view (@@manage-salesforce-credentials)
+  [davisagli - 2012-01-06]
+
 * Make get_salesforce_suds_client return a client even if the authentication
   failed, to make it easier to log exceptions including the message that was
   to be sent to Salesforce.

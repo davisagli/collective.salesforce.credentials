@@ -12,6 +12,18 @@ class ISalesforceCredentialsSettings(Interface):
         )
 
 
+class ISalesforceWebserviceIdentity(Interface):
+
+    name = schema.ASCIILine(
+        title = _(u'Name'),
+        )
+
+    sandbox = schema.ASCIILine(
+        title = _(u'Sandbox'),
+        required = False,
+        )
+
+
 class ISalesforceWebservice(Interface):
     
     endpoint = schema.ASCIILine(
