@@ -73,7 +73,7 @@ class CredentialsForm(CrudForm, form.EditForm):
         name = data['name']
         if data['sandbox']:
             name += '_' + data['sandbox']
-        record = self.services.setdefault('name')
+        record = self.services.setdefault(name)
         for fname in ISalesforceWebservice.names():
             setattr(record, fname, data[fname])
 
